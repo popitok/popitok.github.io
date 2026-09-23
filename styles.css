@@ -12,9 +12,11 @@
 
 html {
   overflow-x: hidden;
-  /* iOS는 상태바와 하단 바 뒤를 html의 배경'색'으로 칠한다. 그라데이션은 색으로 치지 않아
-     흰색이 되므로 단색을 준다 */
+  /* iOS는 상태바와 하단 바 뒤를 html의 배경'색'으로 칠하므로 단색이 필요하다.
+     같은 그라데이션을 이미지로 겹쳐, 본문이 못 덮는 자리에 단색 띠가 보이지 않게 한다 */
   background-color: var(--blue);
+  background-image: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 50%, var(--teal) 100%);
+  background-attachment: fixed;
 }
 
 body {
@@ -203,7 +205,7 @@ html[lang="ko"] .lang__flag--ja, html[lang="ja"] .lang__flag--ko { display: none
   background: rgba(255, 255, 255, 0.16); font-size: 14px; line-height: 1.7;
 }
 .doc__copyright {
-  margin-top: 56px; text-align: right;
+  margin-top: 56px; text-align: left;
   font-size: 11px; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.7);
 }
 .doc__body { display: none; }
@@ -235,7 +237,7 @@ html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang
 @media (max-width: 600px) {
   /* iOS가 상태바와 하단 바 뒤를 칠하는 색은 하나뿐이다. 위아래 모두 파랑으로 끝내
      그 색과 정확히 맞춘다 */
-  body { background: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 50%, var(--blue) 100%) fixed; }
+  html, body { background-image: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 50%, var(--blue) 100%); }
   /* 화면 맨 아래, 사파리 하단 바와 맞닿는 자리에 밝은 헤어라인 */
   body::after {
     content: ''; position: fixed; left: 0; right: 0; bottom: 0; height: 1px;

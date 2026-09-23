@@ -187,9 +187,8 @@ async function drawScreen(w, h) {
   c.width = w * k; c.height = h * k;
   const g = c.getContext('2d');
   g.scale(k, k);
-  const grad = g.createLinearGradient(0, 0, 0, h);
-  grad.addColorStop(0, '#3aa2e9'); grad.addColorStop(0.5, '#3da9e7'); grad.addColorStop(1, '#79c4d2');
-  g.fillStyle = grad; g.fillRect(0, 0, w, h);
+  g.fillStyle = '#3aa2e9';   // 화면도 페이지와 같은 한 톤
+  g.fillRect(0, 0, w, h);
 
   const font = '-apple-system, BlinkMacSystemFont, "SF Pro", "Apple SD Gothic Neo", sans-serif';
   g.fillStyle = '#fff';

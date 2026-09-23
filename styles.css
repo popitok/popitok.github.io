@@ -154,7 +154,7 @@ html[lang="ko"] .lang__flag--ja, html[lang="ja"] .lang__flag--ko { display: none
 .screen {
   position: relative; width: 100%; height: 100%;
   border-radius: 44px; overflow: hidden;
-  background: linear-gradient(180deg, #3aa2e9 0%, #3da9e7 50%, #79c4d2 100%);
+  background: #3aa2e9;
   display: flex; flex-direction: column; align-items: center;
 }
 .status {

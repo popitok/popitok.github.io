@@ -35,7 +35,7 @@ a { color: inherit; text-decoration: none; }
 .nav {
   position: fixed; inset: 0 0 auto 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 24px 56px;
+  padding: calc(24px + env(safe-area-inset-top)) 56px 24px;
   isolation: isolate;
   transition: padding .25s;
 }
@@ -207,7 +207,7 @@ html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
-  .nav { padding: 16px 24px; }
+  .nav { padding: calc(16px + env(safe-area-inset-top)) 24px 16px; }
   .nav.is-scrolled { padding-top: 10px; padding-bottom: 10px; }
   .nav__logo img { width: 92px; }
   .copyright { right: 24px; }   /* same gutter as the nav */
@@ -257,7 +257,7 @@ html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang
   html .menu a[aria-current="page"], html[lang="ja"] .menu a[aria-current="page"] { background: var(--blue); color: #fff; }
 }
 @media (max-width: 420px) {
-  .nav { padding: 12px 24px; }
+  .nav { padding: calc(12px + env(safe-area-inset-top)) 24px 12px; }
   .nav__logo img { width: 78px; }
   .nav { gap: 8px; }
   .nav__right { gap: 14px; }

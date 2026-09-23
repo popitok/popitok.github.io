@@ -4,18 +4,27 @@
   if (!stage) return;
   const PHONE_H = 667, BELOW_FOLD = 60;   // the phone always runs at least this far past the bottom edge
   const fit = () => {
+    stage.style.marginTop = '';   // measure from the stylesheet's value, not from the last run
     // follow whichever is tighter, the window's height or its width
     const fitsBoth = Math.min(innerHeight / 900, innerWidth / 1440);
     // background logo keeps its own scale (unchanged when the phone size is tuned)
     let ls = Math.min(1.5, Math.max(0.78, fitsBoth * 1.12));   // bubble runs a little larger than the window ratio
     let s = Math.min(1.3, Math.max(0.6, fitsBoth * 0.78));   // desktop/tablet phone: 0.78 at 1440x900
+    const isPhone = innerWidth <= 600;
     // phones: the phone is shown large, close to the screen width (tablets keep the desktop rule)
-    if (innerWidth <= 600) s = ls = Math.min(1.3, innerWidth * 0.58 / 318);   // phones: bubble matches the phone scale
-    // keep the bottom of the phone off-screen whatever the window size
+    if (isPhone) s = ls = Math.min(1.3, innerWidth * 0.50 / 318);   // phones: bubble matches the phone scale
     const stageTop = stage.getBoundingClientRect().top;
-    s = Math.min(1.6, Math.max(s, (innerHeight - stageTop + BELOW_FOLD) / PHONE_H));
-    // tablets: the bubble would bottom out at its minimum while the phone grows, so tie it to the phone
-    if (innerWidth > 600 && innerWidth <= 860) ls = Math.min(1.5, s * 1.3);
+    if (isPhone) {
+      // phones: keep the size and lower the phone instead, so its bottom still runs past the fold
+      const want = innerHeight + BELOW_FOLD - PHONE_H * s;
+      if (want > stageTop) stage.style.marginTop =
+        (parseFloat(getComputedStyle(stage).marginTop) + want - stageTop) + 'px';
+    } else {
+      // keep the bottom of the phone off-screen whatever the window size
+      s = Math.min(1.6, Math.max(s, (innerHeight - stageTop + BELOW_FOLD) / PHONE_H));
+      // tablets: the bubble would bottom out at its minimum while the phone grows, so tie it to the phone
+      if (innerWidth <= 860) ls = Math.min(1.5, s * 1.3);
+    }
     stage.style.setProperty('--s', s.toFixed(3));
     stage.style.setProperty('--ls', ls.toFixed(3));
     window.popiPhoneScale = s;

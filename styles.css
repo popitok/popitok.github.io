@@ -10,7 +10,12 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { overflow-x: hidden; }
+html {
+  overflow-x: hidden;
+  /* iOS는 상태바와 하단 바 뒤를 html의 배경'색'으로 칠한다. 그라데이션은 색으로 치지 않아
+     흰색이 되므로 단색을 준다 */
+  background-color: var(--blue);
+}
 
 body {
   font-family: var(--font);

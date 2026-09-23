@@ -231,6 +231,11 @@ html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang
   /* iOS가 상태바와 하단 바 뒤를 칠하는 색은 하나뿐이다. 위아래 모두 파랑으로 끝내
      그 색과 정확히 맞춘다 */
   body { background: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 50%, var(--blue) 100%) fixed; }
+  /* 화면 맨 아래, 사파리 하단 바와 맞닿는 자리에 밝은 헤어라인 */
+  body::after {
+    content: ''; position: fixed; left: 0; right: 0; bottom: 0; height: 1px;
+    background: rgba(255, 255, 255, 0.45); z-index: 50; pointer-events: none;
+  }
   .stage { margin-top: 56px; }   /* extra room for the tilted corner */
   .copyright { font-size: 9px; }
 

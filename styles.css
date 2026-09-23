@@ -15,8 +15,8 @@ html {
   /* iOS가 상태바와 하단 바 뒤를 칠하는 색. 같은 그라데이션을 이미지로 겹쳐
      본문이 못 덮는 자리에 단색이 드러나지 않게 한다 */
   background-color: #000;
-  background-image: linear-gradient(var(--blue), var(--blue));   /* 단색이지만 색 레이어는 검정으로 남겨 둔다 */
-  background-attachment: fixed;
+  background-image: linear-gradient(var(--blue), var(--blue));   /* 단색이지만 색 레이어는 검정으로 남겨 둔다.
+     fixed로 두면 화면 밖 영역에 검정이 드러나므로 붙이지 않는다 */
 }
 
 body {

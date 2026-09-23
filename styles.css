@@ -12,8 +12,9 @@
 
 html {
   overflow-x: hidden;
-  /* 본문이 못 덮는 자리도 같은 그라데이션으로 채운다. 배경'색'은 두지 않는다.
-     색을 두면 iOS가 상태바와 하단 바 뒤를 그 색으로 칠해 버린다 */
+  /* iOS가 상태바와 하단 바 뒤를 칠하는 색. 같은 그라데이션을 이미지로 겹쳐
+     본문이 못 덮는 자리에 단색이 드러나지 않게 한다 */
+  background-color: #000;
   background-image: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 50%, var(--teal) 100%);
   background-attachment: fixed;
 }
@@ -234,11 +235,6 @@ html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang
 }
 /* phones only (same 600px line the phone-size rule in main.js uses) */
 @media (max-width: 600px) {
-  /* 화면 맨 아래, 사파리 하단 바와 맞닿는 자리에 밝은 헤어라인 */
-  body::after {
-    content: ''; position: fixed; left: 0; right: 0; bottom: 0; height: 1px;
-    background: rgba(255, 255, 255, 0.45); z-index: 50; pointer-events: none;
-  }
   .stage { margin-top: 56px; }   /* extra room for the tilted corner */
   .copyright { font-size: 9px; }
 

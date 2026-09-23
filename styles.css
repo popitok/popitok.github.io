@@ -228,6 +228,9 @@ html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang
 }
 /* phones only (same 600px line the phone-size rule in main.js uses) */
 @media (max-width: 600px) {
+  /* iOS가 상태바와 하단 바 뒤를 칠하는 색은 하나뿐이다. 위아래 모두 파랑으로 끝내
+     그 색과 정확히 맞춘다 */
+  body { background: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 50%, var(--blue) 100%) fixed; }
   .stage { margin-top: 56px; }   /* extra room for the tilted corner */
   .copyright { font-size: 9px; }
 

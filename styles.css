@@ -1,0 +1,261 @@
+:root {
+  --blue: #3aa2e9;
+  --blue-mid: #3da9e7;
+  --teal: #79c4d2;
+  --ink: #212631;
+  --ink-soft: #333d4d;
+  --sub: #6b7380;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro", "SF Pro Text", "Apple SD Gothic Neo", "Hiragino Sans", "Noto Sans KR", "Noto Sans JP", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { overflow-x: hidden; }
+
+body {
+  font-family: var(--font);
+  color: #fff;
+  background: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 50%, var(--teal) 100%) fixed;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-x: hidden;
+}
+/* Japanese has no spaces between words, so keep-all would never wrap it */
+html[lang="ja"] body { word-break: normal; line-break: strict; }
+html[lang="ja"] .intro h1, html[lang="ja"] .intro p { text-wrap: balance; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 56px;
+  isolation: isolate;
+  transition: padding .25s;
+}
+/* backdrop that fades in with scroll (--nav-fade 0..1) and dissolves toward its lower edge */
+.nav::before {
+  content: ""; position: absolute; inset: 0 0 -36px 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(58, 162, 233, 0.6) 0%, rgba(58, 162, 233, 0) 100%);
+  backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 45%, transparent 100%);
+  opacity: var(--nav-fade, 0);
+}
+.nav.is-scrolled { padding-top: 14px; padding-bottom: 14px; }
+.nav__logo img { display: block; width: 112px; height: auto; }
+.menu {
+  display: flex; gap: 4px; padding: 6px;
+  border-radius: 999px;
+}
+.menu a {
+  /* fixed height + min-width = height: a short label like 홈 becomes a perfect circle */
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; min-width: 40px; padding: 0 12px; border-radius: 999px;
+  font-size: 15px; font-weight: 500; color: #fff;
+  white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.menu a:hover { background: rgba(58, 162, 233, 0.12); }
+.menu a[aria-current="page"] { background: #fff; color: var(--blue); font-weight: 600; }
+
+.nav__right { position: relative; display: flex; align-items: center; gap: 14px; }
+.more { display: none; }
+.lang {
+  position: relative;
+  width: 20px; height: 20px; padding: 0; border: 0; border-radius: 50%;
+  background: none; cursor: pointer; flex: none;
+  box-shadow: 0 0 0 2px #fff;
+  transition: transform .2s;
+}
+/* invisible 44px tap target around the small flag */
+.lang::after { content: ""; position: absolute; inset: -12px; }
+.lang:hover { transform: scale(1.08); }
+.lang__flag { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+html[lang="ko"] .lang__flag--ja, html[lang="ja"] .lang__flag--ko { display: none; }
+
+/* ---------- Home hero ---------- */
+/* copy on top, phone centred below it; the phone's lower part runs past the fold */
+.hero {
+  position: relative;
+  height: 100vh; height: 100svh; min-height: 760px;
+  overflow: clip;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 140px 24px 0;
+  text-align: center;
+}
+.intro { position: relative; z-index: 2; max-width: 720px; }
+.intro h1 {
+  font-size: 44px; font-weight: 700; line-height: 1.28; letter-spacing: -0.01em;
+}
+.intro p { margin-top: 20px; font-size: 19px; line-height: 1.6; }
+
+/* store buttons (Figma "Buttons" layout): 120x50 black rounded rectangles, white icon and 16px Google Sans Flex label, 8px icon gap */
+.stores { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 28px; }
+.store {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 120px; height: 50px; padding: 8px 16px; border-radius: 16px;
+  background: #000; color: #fff;
+  font: 500 16px/20px "Google Sans Flex", var(--font);
+  transition: background .2s, transform .2s;
+}
+.store:hover { background: #1f1f1f; transform: translateY(-2px); }
+.store__icon { display: block; flex: none; }
+
+.stage { --s: 1; position: relative; width: 100%; flex: 1; margin-top: 70px; }
+.copyright {
+  /* stood on its side along the right edge, reading top to bottom */
+  position: absolute; right: 56px; bottom: 24px; z-index: 3;   /* right edge lines up with the nav padding */
+  writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 0.06em;
+  font-size: 11px; color: rgba(255, 255, 255, 0.7);
+}
+.bg-logo {
+  position: absolute; left: 50%; top: calc(333px * var(--s));   /* concentric with the phone: half the phone's height */
+  width: calc(738px * var(--ls, var(--s))); max-width: none; opacity: 0.7;
+  transform: translate(-50%, -50%);
+  will-change: transform; pointer-events: none;
+}
+/* very slight overall softness so the logo sits behind the phone */
+.bg-logo img { display: block; width: 100%; height: auto; filter: blur(3px) contrast(0.6) brightness(1.25) saturate(0.8); }   /* bright, milky haze: flatten first, then lift so whites stay white */
+
+/* ---------- 3D phone ---------- */
+.phone-wrap {
+  position: absolute; left: 50%; top: 0;
+  width: 317px; height: 667px;
+  margin-left: -158px;
+  transform-origin: 50% 0;
+  /* rotating about the top swings the phone's middle ~35px right; shift back so its centre sits on the page centre */
+  transform: scale(var(--s)) translateX(-35px) rotate(-6deg);
+  perspective: 1400px;
+}
+.phone {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.phone__layer, .phone__front {
+  position: absolute; inset: 0; border-radius: 54px;
+}
+/* stacked slices give the body its thickness */
+.phone__layer { background: #2a2e35; }
+.phone__layer--back { background: #15171b; box-shadow: 0 40px 80px rgba(13, 51, 102, 0.35), 0 8px 20px rgba(0, 0, 0, 0.18); }
+.phone__front {
+  background: #17191e; padding: 10px;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.08);
+}
+.screen {
+  position: relative; width: 100%; height: 100%;
+  border-radius: 44px; overflow: hidden;
+  background: linear-gradient(180deg, #3aa2e9 0%, #3da9e7 50%, #79c4d2 100%);
+  display: flex; flex-direction: column; align-items: center;
+}
+.status {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  padding: 17px 26px 0 38px; font-size: 13px; font-weight: 600;
+}
+.status svg { display: block; }
+.screen__logo { width: 121px; margin-top: 214px; }
+.screen__title { margin-top: auto; font-size: 16px; font-weight: 700; color: #efefef; }
+.screen__sub { margin: 6px 0 110px; font-size: 10.5px; color: #efefef; }
+.glare {
+  position: absolute; inset: 0; border-radius: 44px; pointer-events: none;
+  background: radial-gradient(circle at var(--gx, 30%) var(--gy, 20%), rgba(255,255,255,0.28), rgba(255,255,255,0) 55%);
+  mix-blend-mode: soft-light;
+}
+
+/* WebGL phone: canvas is larger than the phone so the tilt has room; phone top sits at the stage top */
+.phone3d {
+  position: absolute; left: 50%; top: -47px;
+  width: 720px; height: 760px; margin-left: -360px;
+  transform-origin: 50% 47px;
+  transform: scale(var(--s)) translateX(-35px) rotate(-6deg);   /* askew, centre kept on the page centre */
+  display: none; pointer-events: none;
+}
+.phone3d canvas { display: block; width: 100%; height: 100%; }
+.has-3d .phone3d { display: block; }
+.has-3d .phone-wrap { display: none; }
+
+/* ---------- Document pages ---------- */
+/* same blue background as home, white text throughout */
+.doc-hero { padding: 168px 24px 56px; }
+.doc-hero__inner { max-width: 736px; margin: 0 auto; }
+.doc-hero h1 { font-size: 44px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
+.doc-hero .date { margin-top: 12px; font-size: 15px; opacity: 0.85; }
+
+.doc { max-width: 736px; margin: 0 auto; padding: 8px 0 120px; color: #fff; }
+.doc__lead { font-size: 16px; line-height: 1.8; }
+.doc__lead p + p { margin-top: 8px; }
+.doc section { margin-top: 48px; }
+.doc h2 { font-size: 21px; font-weight: 700; line-height: 1.4; }
+.doc h3 { margin-top: 24px; font-size: 16px; font-weight: 600; }
+.doc section p { margin-top: 12px; font-size: 16px; line-height: 1.8; }
+.doc ul { margin-top: 12px; padding-left: 1.2em; }
+.doc li { font-size: 16px; line-height: 1.8; }
+.doc li::marker { color: rgba(255, 255, 255, 0.7); }
+.doc .note {
+  margin-top: 20px; padding: 14px 18px; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.16); font-size: 14px; line-height: 1.7;
+}
+.doc__body { display: none; }
+html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang="ja"] { display: block; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .nav { padding: 16px 24px; }
+  .nav.is-scrolled { padding-top: 10px; padding-bottom: 10px; }
+  .nav__logo img { width: 92px; }
+  .copyright { right: 24px; }   /* same gutter as the nav */
+  .menu a { height: 32px; min-width: 32px; padding: 0 9px; font-size: 13px; }
+  .hero { padding: 110px 40px 0; min-height: 680px; }
+  .intro h1 { font-size: 28px; }
+  .intro p { font-size: 16px; }
+  .stage { margin-top: 92px; }
+  .bg-logo { width: calc(590px * var(--ls, var(--s))); }
+  .doc-hero { padding: 120px 28px 32px; }
+  .doc-hero h1 { font-size: 30px; }
+  .doc { padding: 0 28px 80px; }
+  .doc section { margin-top: 40px; }
+  .doc h2 { font-size: 18px; }
+  .doc h3 { font-size: 15px; }
+  .doc__lead, .doc section p, .doc li { font-size: 15px; line-height: 1.75; }
+  .doc .note { font-size: 13px; }
+}
+/* phones only (same 600px line the phone-size rule in main.js uses) */
+@media (max-width: 600px) {
+  .stage { margin-top: 56px; }   /* extra room for the tilted corner */
+  .copyright { font-size: 9px; }
+
+  /* menu collapses behind a "more" button */
+  .more {
+    display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22); color: #fff; cursor: pointer;
+  }
+  .more__close, .nav.is-open .more__dots { display: none; }
+  .nav.is-open .more__close { display: block; }
+  /* flag matches the 36px more button: 32px flag + the 2px white ring on each side = 36px */
+  .lang { width: 32px; height: 32px; }
+  .lang::after { inset: -6px; }   /* 44px tap target */
+  .menu {
+    display: none; position: absolute; top: calc(100% + 10px); right: 0;
+    flex-direction: column; align-items: stretch; gap: 2px; min-width: 190px; padding: 8px;
+    border-radius: 18px; background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 16px 40px rgba(13, 51, 102, 0.25);
+  }
+  .nav.is-open .menu { display: flex; }
+  .menu a, html[lang="ja"] .menu a {
+    justify-content: flex-start; height: 44px; min-width: 0; padding: 0 14px;
+    border-radius: 12px; font-size: 15px; color: var(--blue);
+  }
+  .menu a:hover { background: rgba(58, 162, 233, 0.1); }
+  /* matches the specificity of the html[lang=...] rule above, so the white text is not overridden */
+  html .menu a[aria-current="page"], html[lang="ja"] .menu a[aria-current="page"] { background: var(--blue); color: #fff; }
+}
+@media (max-width: 420px) {
+  .nav { padding: 12px 24px; }
+  .nav__logo img { width: 78px; }
+  .nav { gap: 8px; }
+  .nav__right { gap: 14px; }
+  .intro h1 { font-size: 24px; }
+  .intro h1 br { display: none; }
+}

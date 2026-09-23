@@ -202,6 +202,10 @@ html[lang="ko"] .lang__flag--ja, html[lang="ja"] .lang__flag--ko { display: none
   margin-top: 20px; padding: 14px 18px; border-radius: 12px;
   background: rgba(255, 255, 255, 0.16); font-size: 14px; line-height: 1.7;
 }
+.doc__copyright {
+  margin-top: 56px; text-align: right;
+  font-size: 11px; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.7);
+}
 .doc__body { display: none; }
 html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang="ja"] { display: block; }
 
@@ -225,6 +229,7 @@ html[lang="ko"] .doc__body[data-lang="ko"], html[lang="ja"] .doc__body[data-lang
   .doc h3 { font-size: 15px; }
   .doc__lead, .doc section p, .doc li { font-size: 15px; line-height: 1.75; }
   .doc .note { font-size: 13px; }
+  .doc__copyright { margin-top: 40px; font-size: 10px; }
 }
 /* phones only (same 600px line the phone-size rule in main.js uses) */
 @media (max-width: 600px) {

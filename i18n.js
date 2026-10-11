@@ -8,6 +8,7 @@
     ko: {
       'title.home': 'PopiTok',
       'title.privacy': '개인정보처리방침 | PopiTok',
+      'title.support': '고객지원 | PopiTok',
       'title.terms': '서비스약관 | PopiTok',
       'nav.homeLabel': 'PopiTok 홈',
       'nav.home': '홈',
@@ -21,6 +22,7 @@
       'intro.body': '새로운 사람을 만나 관심사와 이야기를 나누고, 서로의 생각과 문화를 공유해보세요.',
       'doc.date': '시행일 2026. 10. 01.',
       'doc.body': body.ko,
+      'support.title': '고객지원',
       'privacy.title': '개인정보처리방침',
       'privacy.s1': '제1조 수집하는 개인정보 항목',
       'privacy.s2': '제2조 개인정보의 수집 및 이용 목적',
@@ -39,6 +41,7 @@
     ja: {
       'title.home': 'PopiTok',
       'title.privacy': 'プライバシーポリシー | PopiTok',
+      'title.support': 'サポート | PopiTok',
       'title.terms': '利用規約 | PopiTok',
       'nav.homeLabel': 'PopiTok ホーム',
       'nav.home': 'ホーム',
@@ -52,6 +55,7 @@
       'intro.body': '新しい人と出会い、趣味や話題を共有しながら、お互いの考えや文化を分かち合いましょう。',
       'doc.date': '施行日 2026年10月1日',
       'doc.body': body.ja,
+      'support.title': 'サポート',
       'privacy.title': 'プライバシーポリシー',
       'privacy.s1': '第1条 収集する個人情報の項目',
       'privacy.s2': '第2条 個人情報の収集および利用目的',

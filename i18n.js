@@ -82,9 +82,10 @@
   function apply(lang) {
     const t = T[lang];
     document.documentElement.lang = lang;
-    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n]; });
-    document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t[el.dataset.i18nHtml]; });
-    document.querySelectorAll('[data-i18n-label]').forEach(el => { el.setAttribute('aria-label', t[el.dataset.i18nLabel]); });
+    // 키가 없으면 건드리지 않는다. 오래된 사본이 캐시에 남아 있어도 HTML의 원래 글자가 살아남는다
+    document.querySelectorAll('[data-i18n]').forEach(el => { const v = t[el.dataset.i18n]; if (v != null) el.textContent = v; });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => { const v = t[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v; });
+    document.querySelectorAll('[data-i18n-label]').forEach(el => { const v = t[el.dataset.i18nLabel]; if (v != null) el.setAttribute('aria-label', v); });
     const titleKey = document.documentElement.dataset.titleKey;
     if (titleKey) document.title = t[titleKey];
   }

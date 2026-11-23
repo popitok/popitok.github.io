@@ -192,7 +192,7 @@ html[lang="ko"] .lang__flag--ja, html[lang="ja"] .lang__flag--ko { display: none
 .doc h2 { font-size: 21px; font-weight: 700; line-height: 1.4; }
 .doc h3 { margin-top: 24px; font-size: 16px; font-weight: 600; }
 .doc section p { margin-top: 12px; font-size: 16px; line-height: 1.8; }
-.doc ul { margin-top: 12px; padding-left: 1.2em; }
+.doc ul, .doc ol { margin-top: 12px; padding-left: 1.2em; }
 .doc li { font-size: 16px; line-height: 1.8; }
 .doc li::marker { color: rgba(255, 255, 255, 0.7); }
 .doc .note {

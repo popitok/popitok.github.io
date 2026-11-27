@@ -19,6 +19,7 @@
       'lang.switch': '日本語に切り替える',
       'store.apple': 'App Store에서 다운로드',
       'store.google': 'Google Play에서 다운로드',
+      'store.appleUrl': 'https://apps.apple.com/kr/app/popitok/id6792381000',
       'intro.title': 'PopiTok은 한국과 일본의 <br>사람들이 만나 교류할 수 있는 공간입니다.',
       'intro.body': '새로운 사람을 만나 관심사와 이야기를 나누고, 서로의 생각과 문화를 공유해보세요.',
       'doc.date': '시행일 2026. 10. 01.',
@@ -53,6 +54,7 @@
       'lang.switch': '한국어로 전환',
       'store.apple': 'App Storeからダウンロード',
       'store.google': 'Google Playで手に入れよう',
+      'store.appleUrl': 'https://apps.apple.com/jp/app/popitok/id6792381000',
       'intro.title': 'PopiTokは、日本と韓国の人々が<br>出会い、交流できる場所です。',
       'intro.body': '新しい人と出会い、趣味や話題を共有しながら、お互いの考えや文化を分かち合いましょう。',
       'doc.date': '施行日 2026年10月1日',
@@ -86,6 +88,7 @@
     document.querySelectorAll('[data-i18n]').forEach(el => { const v = t[el.dataset.i18n]; if (v != null) el.textContent = v; });
     document.querySelectorAll('[data-i18n-html]').forEach(el => { const v = t[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v; });
     document.querySelectorAll('[data-i18n-label]').forEach(el => { const v = t[el.dataset.i18nLabel]; if (v != null) el.setAttribute('aria-label', v); });
+    document.querySelectorAll('[data-i18n-href]').forEach(el => { const v = t[el.dataset.i18nHref]; if (v != null) el.setAttribute('href', v); });   // 스토어는 언어에 맞는 나라 페이지로
     const titleKey = document.documentElement.dataset.titleKey;
     if (titleKey) document.title = t[titleKey];
   }
